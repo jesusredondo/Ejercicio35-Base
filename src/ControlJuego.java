@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -36,11 +37,17 @@ public class ControlJuego {
 	 */
 	public void inicializarPartida(){
 		//Borro del tablero la información que pudiera haber anteriormente (los pongo todos a cero):
+		
 
 		//Me creo LADO_TABLERO*LADO_TABLERO números en un array list, uno para cada una de las posiciones del tablero:
 
 		//Saco 20 posiciones sin repetir del array y les coloco una mina en el tablero:
-
+		ArrayList<Integer> posiciones= new ArrayList<Integer>();
+		for (int i = 0; i < 100; i++) {
+		posiciones.add(i);
+		}
+		Random  aleatorio= new Random();
+		//Intentar meter aleatorios en un hasmap y hacer que no se repitan.
 		//Calculo para todas las posiciones que no tienen minas, cuántas minas hay alrededor.
 		
 		//Pongo la puntuación a cero:
