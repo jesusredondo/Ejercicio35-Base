@@ -42,7 +42,7 @@ public class ControlJuego {
 		//Me creo LADO_TABLERO*LADO_TABLERO números en un array list, uno para cada una de las posiciones del tablero:
 
 		//Saco 20 posiciones sin repetir del array y les coloco una mina en el tablero:
-	
+	//dgdfgdg
 		//Intentar meter aleatorios en un hasmap y hacer que no se repitan.
 		//Calculo para todas las posiciones que no tienen minas, cuántas minas hay alrededor.
 		
