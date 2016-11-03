@@ -139,7 +139,21 @@ public class VentanaPrincipal {
 	 * Método que inicializa todos los lísteners que necesita inicialmente el programa
 	 */
 	public void inicializarListeners(){
-		//TODO
+		botonEmpezar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+			juego.inicializarPartida();
+				
+			}
+		});
+		for (int i = 0; i < botonesJuego.length; i++) {
+			for (int k = 0; k < botonesJuego[i].length; k++) {
+				botonesJuego[i][k].addActionListener(new ActionBoton(this, juego, i, k));
+			}
+		
+		}
+		
 	}
 	
 	
@@ -156,7 +170,14 @@ public class VentanaPrincipal {
 	 * @param j: posición horizontal de la celda.
 	 */
 	public void mostrarNumMinasAlrededor(int i , int j) {
-		//TODO
+		int nuMinasAlrededor= juego.getMinasAlrededor(i, j);
+		
+		panelesJuego[i][j].removeAll();
+		JLabel pantallaMinasAlrededor = new JLabel(""+nuMinasAlrededor);
+		pantallaMinasAlrededor.setForeground(correspondenciaColores[nuMinasAlrededor]);
+		pantallaMinasAlrededor.setHorizontalAlignment(SwingConstants.CENTER);
+		panelesJuego[i][j].add(pantallaMinasAlrededor);
+		refrescarPantalla();
 	}
 	
 	

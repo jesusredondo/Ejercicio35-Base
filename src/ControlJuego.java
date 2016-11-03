@@ -4,8 +4,8 @@ import java.util.Random;
 
 /**
  * Clase gestora del tablero de juego. Guarda una matriz de enteros representado
- * el tablero. Si hay una mina en una posici√≥n guarda el n√∫mero -1 Si no hay
- * una mina, se guarda cu√°ntas minas hay alrededor. Almacena la puntuaci√≥n de
+ * el tablero. Si hay una mina en una posiciÛn guarda el n˙mero -1 Si no hay
+ * una mina, se guarda cu·ntas minas hay alrededor. Almacena la puntuaciÛn de
  * la partida
  * 
  * @author jesusredondogarcia
@@ -29,23 +29,28 @@ public class ControlJuego {
 	}
 
 	/**
-	 * M√©todo para generar un nuevo tablero de partida:
+	 * MÈtodo para generar un nuevo tablero de partida:
 	 * 
 	 * @pre: La estructura tablero debe existir.
-	 * @post: Al final el tablero se habr√° inicializado con tantas minas como
+	 * @post: Al final el tablero se habr· inicializado con tantas minas como
 	 *        marque la variable MINAS_INICIALES. El resto de posiciones que no
-	 *        son minas guardan en el entero cu√°ntas minas hay alrededor de la
+	 *        son minas guardan en el entero cu·ntas minas hay alrededor de la
 	 *        celda
 	 */
 	public void inicializarPartida() {
-		// Borro del tablero la informaci√≥n que pudiera haber anteriormente
+		// Borro del tablero la informaciÛn que pudiera haber anteriormente
 		// (los pongo todos a cero):
 
-		// Me creo LADO_TABLERO*LADO_TABLERO n√∫meros en un array list, uno para
+		// Me creo LADO_TABLERO*LADO_TABLERO n˙meros en un array list, uno para
 		// cada una de las posiciones del tablero:
 
 		// Saco 20 posiciones sin repetir del array y les coloco una mina en el
 		// tablero:
+		for (int i = 0; i < tablero.length; i++) {
+			for (int j = 0; j < tablero[i].length; j++) {
+				tablero[i][j]=0;
+			}
+		}
 		ArrayList<Integer> posiciones = new ArrayList<Integer>();
 		for (int i = 0; i < 100; i++) {
 			posiciones.add(i);
@@ -69,12 +74,14 @@ public class ControlJuego {
 			tablero[fila][columna] = MINA;
 
 		}
-
+		int contMi=0;
 		for (int i = 0; i < tablero.length; i++) {
 			for (int j = 0; j < tablero[i].length; j++) {
 				if (tablero[i][j] != -1) {
 					tablero[i][j] = 0;
 
+				}else{
+					contMi++;
 				}
 			}
 		}
@@ -88,34 +95,35 @@ public class ControlJuego {
 
 			}
 		}
+		System.out.println(contMi);
 		depurarTablero();
 
-		// Calculo para todas las posiciones que no tienen minas, cu√°ntas minas
+		// Calculo para todas las posiciones que no tienen minas, cu·ntas minas
 		// hay alrededor.
 
-		// Pongo la puntuaci√≥n a cero:
+		// Pongo la puntuaciÛn a cero:
 
 	}
 
 	/**
-	 * C√°lculo de las minas adjuntas: Para calcular el n√∫mero de minas tenemos
+	 * C·lculo de las minas adjuntas: Para calcular el n˙mero de minas tenemos
 	 * que tener en cuenta que no nos salimos nunca del tablero. Por lo tanto,
-	 * como mucho la i y la j valdr√°n LADO_TABLERO-1. Por lo tanto, como mucho
-	 * la i y la j valdr√°n como poco 0.
+	 * como mucho la i y la j valdr·n LADO_TABLERO-1. Por lo tanto, como mucho
+	 * la i y la j valdr·n como poco 0.
 	 * 
 	 * @param i:
-	 *            posici√≥n verticalmente de la casilla a rellenar
+	 *            posiciÛn verticalmente de la casilla a rellenar
 	 * @param j:
-	 *            posici√≥n horizontalmente de la casilla a rellenar
-	 * @return : El n√∫mero de minas que hay alrededor de la casilla [i][j]
+	 *            posiciÛn horizontalmente de la casilla a rellenar
+	 * @return : El n˙mero de minas que hay alrededor de la casilla [i][j]
 	 */
 	private int calculoMinasAdjuntas(int i, int j) {
 		int sumaMinas = 0;
-		for (int y = i - 1; i < i + 1; y++) {
-			for (int z = j - 1; j < j + 1; z++) {
-				if (y >= 0 && z >= 0) {
-					if (y <= LADO_TABLERO - 1 && z <= LADO_TABLERO - 1) {
-						if (tablero[y][z] == -1) {
+		for (int y = i - 1; y <= i + 1; y++) {
+			for (int z = j - 1; z <= j + 1; z++) {
+				if ((y >= 0) && (z >= 0)) {
+					if ((y < LADO_TABLERO)  && (z < LADO_TABLERO)) {
+						if (tablero[y][z] == MINA) {
 							sumaMinas++;
 						}
 
@@ -129,32 +137,37 @@ public class ControlJuego {
 	}
 
 	/**
-	 * M√©todo que nos permite
+	 * MÈtodo que nos permite
 	 * 
 	 * @pre : La casilla nunca debe haber sido abierta antes, no es controlado
 	 *      por el GestorJuego. Por lo tanto siempre sumaremos puntos
 	 * @param i:
-	 *            posici√≥n verticalmente de la casilla a abrir
+	 *            posiciÛn verticalmente de la casilla a abrir
 	 * @param j:
-	 *            posici√≥n horizontalmente de la casilla a abrir
+	 *            posiciÛn horizontalmente de la casilla a abrir
 	 * @return : Verdadero si no ha explotado una mina. Falso en caso contrario.
 	 */
 	public boolean abrirCasilla(int i, int j) {
-
+		if (tablero[i][j]==MINA) {
+			return false;
+		}
+		puntuacion++;
+		return true;
 	}
 
 	/**
-	 * M√©todo que checkea si se ha terminado el juego porque se han abierto
+	 * MÈtodo que checkea si se ha terminado el juego porque se han abierto
 	 * todas las casillas.
 	 * 
 	 * @return Devuelve verdadero si se han abierto todas las celdas que no son
 	 *         minas.
 	 **/
 	public boolean esFinJuego() {
+		return puntuacion==(LADO_TABLERO*LADO_TABLERO)-MINAS_INICIALES;
 	}
 
 	/**
-	 * M√©todo que pinta por pantalla toda la informaci√≥n del tablero, se
+	 * MÈtodo que pinta por pantalla toda la informaciÛn del tablero, se
 	 * utiliza para depurar
 	 */
 	public void depurarTablero() {
@@ -165,29 +178,33 @@ public class ControlJuego {
 			}
 			System.out.println();
 		}
-		System.out.println("\nPuntuaci√≥n: " + puntuacion);
+		System.out.println("\nPuntuaciÛn: " + puntuacion);
 	}
 
 	/**
-	 * M√©todo que se utiliza para obtener las minas que hay alrededor de una
+	 * MÈtodo que se utiliza para obtener las minas que hay alrededor de una
 	 * celda
 	 * 
 	 * @pre : El tablero tiene que estar ya inicializado, por lo tanto no hace
-	 *      falta calcularlo, s√≠mplemente consultarlo
+	 *      falta calcularlo, sÌmplemente consultarlo
 	 * @param i
-	 *            : posici√≥n vertical de la celda.
+	 *            : posiciÛn vertical de la celda.
 	 * @param j
-	 *            : posici√≥n horizontal de la cela.
-	 * @return Un entero que representa el n√∫mero de minas alrededor de la
+	 *            : posiciÛn horizontal de la cela.
+	 * @return Un entero que representa el n˙mero de minas alrededor de la
 	 *         celda
 	 */
+	public int getMinasAlrededor(int i, int j){
+		return tablero[i][j];
+	}
 
 	/**
-	 * M√©todo que devuelve la puntuaci√≥n actual
+	 * MÈtodo que devuelve la puntuaciÛn actual
 	 * 
-	 * @return Un entero con la puntuaci√≥n actual
+	 * @return Un entero con la puntuaciÛn actual
 	 */
 	public int getPuntuacion() {
+		return puntuacion;
 	}
 
 }
