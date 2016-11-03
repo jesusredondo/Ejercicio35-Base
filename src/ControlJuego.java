@@ -82,6 +82,7 @@ public class ControlJuego {
 		for (int i = 0; i < tablero.length; i++) {
 			for (int j = 0; j < tablero[i].length; j++) {
 				if (tablero[i][j] != -1) {
+					//System.out.println(calculoMinasAdjuntas(i, j));
 					tablero[i][j] = calculoMinasAdjuntas(i, j);
 				}
 
@@ -113,7 +114,7 @@ public class ControlJuego {
 		for (int y = i - 1; i < i + 1; y++) {
 			for (int z = j - 1; j < j + 1; z++) {
 				if (y >= 0 && z >= 0) {
-					if (y <= LADO_TABLERO - 1 & z <= LADO_TABLERO - 1) {
+					if (y <= LADO_TABLERO - 1 && z <= LADO_TABLERO - 1) {
 						if (tablero[y][z] == -1) {
 							sumaMinas++;
 						}
