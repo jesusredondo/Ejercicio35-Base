@@ -102,6 +102,7 @@ public class ControlJuego {
 		// hay alrededor.
 
 		// Pongo la puntuación a cero:
+		puntuacion=0;
 
 	}
 
@@ -162,6 +163,8 @@ public class ControlJuego {
 	 * @return Devuelve verdadero si se han abierto todas las celdas que no son
 	 *         minas.
 	 **/
+	
+	
 	public boolean esFinJuego() {
 		return puntuacion==(LADO_TABLERO*LADO_TABLERO)-MINAS_INICIALES;
 	}

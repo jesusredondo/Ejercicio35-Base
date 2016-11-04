@@ -144,6 +144,18 @@ public class VentanaPrincipal {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 			juego.inicializarPartida();
+			for (int i = 0; i < botonesJuego.length; i++) {
+				for (int j = 0; j < botonesJuego[i].length; j++) {
+					panelesJuego[i][j].removeAll();
+					
+					panelesJuego[i][j].add(botonesJuego[i][j]);
+					botonesJuego[i][j].setEnabled(true);
+					
+					
+				}
+			}
+			actualizarPuntuacion();
+			refrescarPantalla();
 				
 			}
 		});
@@ -187,14 +199,23 @@ public class VentanaPrincipal {
 	 * @post : Todos los botones se desactivan excepto el de volver a iniciar el juego.
 	 */
 	public void mostrarFinJuego(boolean porExplosion) {
-		//TODO
+		JOptionPane.showMessageDialog(ventana, "Has perdido", "GAME OVER",JOptionPane.ERROR_MESSAGE);
+		
+		
+	}
+	public void inhabilitarBotones(){
+		for (int i = 0; i <botonesJuego.length; i++) {
+			for (int j = 0; j < botonesJuego[i].length; j++) {
+				botonesJuego[i][j].setEnabled(false);
+			}
+		}
 	}
 
 	/**
 	 * Método que muestra la puntuación por pantalla.
 	 */
 	public void actualizarPuntuacion() {
-		//TODO
+	pantallaPuntuacion.setText(String.valueOf(juego.getPuntuacion()));
 	}
 	
 	/**
