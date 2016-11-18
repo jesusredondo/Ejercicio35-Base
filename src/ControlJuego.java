@@ -35,15 +35,43 @@ public class ControlJuego {
 	 * 			El resto de posiciones que no son minas guardan en el entero cuántas minas hay alrededor de la celda
 	 */
 	public void inicializarPartida(){
+		Random rd = new Random();
+		int aleatorio;
+		ArrayList<Integer> numeroTablero = new ArrayList<>();
+		
 		//Borro del tablero la información que pudiera haber anteriormente (los pongo todos a cero):
-
-		//Me creo LADO_TABLERO*LADO_TABLERO números en un array list, uno para cada una de las posiciones del tablero:
-
+		
+		for (int i = 0; i < tablero.length; i++) {
+			for (int j = 0; j < tablero[i].length; j++) {
+				tablero[i][j] = 0;
+			}
+		}
+		
+		//Me creo LADO_TABLERO*LADO_TABLERO números en un array list, uno para cada una de las posiciones del tablero:		
+		for (int i = 0; i < (LADO_TABLERO*LADO_TABLERO); i++) {
+			numeroTablero.add(i);
+		}
+		
 		//Saco 20 posiciones sin repetir del array y les coloco una mina en el tablero:
+		for (int i = 0; i < numeroTablero.size(); i++) {
+			aleatorio = rd.nextInt(numeroTablero.size());
+			
+			
+			
+		}
 
 		//Calculo para todas las posiciones que no tienen minas, cuántas minas hay alrededor.
 		
 		//Pongo la puntuación a cero:
+		
+		
+		
+		
+		
+		
+		
+		
+		
 
 		
 	}
@@ -67,9 +95,9 @@ public class ControlJuego {
 	 * @param j: posición horizontalmente de la casilla a abrir
 	 * @return : Verdadero si no ha explotado una mina. Falso en caso contrario.
 	 */
-	public boolean abrirCasilla(int i, int j){
-
-	}
+	//public boolean abrirCasilla(int i, int j){
+	//
+	//}
 	
 	
 	
